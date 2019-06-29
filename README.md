@@ -335,7 +335,42 @@ hls推流使用rtmp转换，配置好相关的推流服务器即可，这里没�
 
 返回：0：成功，返回其他参数查看错误码；
 
+/************************************************/
+
+8、U盘和SATA硬盘热插拔管理，支持一个U盘和一个SATA硬盘的自动管理，U盘自动挂载在/tmp/usbDisk，SATA硬盘自动挂载在/tmp/hardDisk
+
+8.1 void ZY_MPI_UDiskOrHardDisk_Init();
+
+功能：初始化硬盘挂载
+
+参数：无
+
+返回：0：无
+8.2 int ZY_MPI_UDiskOrHardDisk_HotPlug_Start();
+
+功能：启动硬盘自动挂载
+
+参数：无
+
+返回：0：成功，返回其他参数查看错误码；
+
+8.3 int ZY_MPI_UDiskOrHardDisk_HotPlug_Stop();
+
+功能：停止硬盘自动挂载
+
+参数：无
+
+返回：0：成功，返回其他参数查看错误码；
+
+/************************************************/
+
+9、QT支持，自动配置QT FB，使用此函数后，不需要关心QT FB配置
+9.1 int ZY_MPI_FB_Open(int fb,int width,int height);
 
 
+功能：初始化QT FB配置
 
+参数：1：指定的fB；2：设置FB的宽；3：设置FB的高
+
+返回：0：成功，返回其他参数查看错误码；
 
