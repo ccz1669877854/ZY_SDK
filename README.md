@@ -13,30 +13,48 @@ rtsp服务端，支持多个通道，根据主控芯片的编码性能，可以�
 比如通道号为1，码流为H.264，地址为rtsp://ip:554/ZY_stream_ch1/h264.
 
 1.1 int ZY_MPI_RtspServer_Init();
+
 功能：初始化rtsp服务端
+
 参数：无
+
 返回：0：成功，-1：失败；
+
 
 1.2 int ZY_MPI_RtspServer_UnInit();
+
 功能：退出rtsp服务端
+
 参数：无
+
 返回：0：成功，-1：失败；
 
+
 1.3 int ZY_MPI_RtspServer_CreateChn(unsigned int rtspChn,ZY_RTSP_ATTR attr);
+
 功能：创建一个rtsp服务端通道，具体通道号发送音视频数据。
+
 参数：1：通道号；2：rtsp服务端的属性，可以选择码流种类，需要跟实际编码格式对应，否则解析不了数据。
+
 返回：0：成功，返回其他参数查看错误码；
 
 1.4 int ZY_MPI_RtspServer_SendVideoFrame(unsigned int rtspChn,unsigned char *pdata ,unsigned int length,unsigned long long int pts,ZY_CodecType  type);
 
 功能：发送视频数据，海思编码后把数据之间填进来，支持按帧，按包格式发送。
+
+
 参数：1：通道号；2：数据；参数3：长度；参数4：时间戳，时间戳为-1为自动时间戳，API会自动处理，默认建议用户填写-1；参数5：编码类别。
+
+
 返回：0：成功，返回其他参数查看错误码；
+
 
 1.5 int ZY_MPI_RtspServer_SendAudioFrame(unsigned int rtspChn,unsigned char *pdata ,unsigned int length,unsigned long long int pts,ZY_CodecType  type);
 
 功能：发送音频数据，海思编码后把数据之间填进来，支持按帧，按包格式发送。
+
 参数：1：通道号；2：数据；参数3：长度；参数4：时间戳，时间戳为-1为自动时间戳，API会自动处理，默认建议用户填写-1；参数5：编码类别。
+
 返回：0：成功，返回其他参数查看错误码；
 
 /************************************************/
