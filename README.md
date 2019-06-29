@@ -68,6 +68,7 @@ rtsp服务端，支持多个通道，根据主控芯片的编码性能，可以�
 typedef enum _RTSP_TYPE
 
 {
+
 	RTSP_H264 = 1,//只要H.264流视频
 	
 	RTSP_H265,//只要H.265流视频
@@ -85,6 +86,7 @@ typedef enum _RTSP_TYPE
 typedef struct _ZY_RTSP_ATTR
 
 {
+
 	ZY_AUDIO_SOUND_MODE_E enSoundmode; //音频声道
 	
 	ZY_AUDIO_SAMPLERATE samplerate;    //音频采样率
