@@ -1,5 +1,5 @@
-# ZY_SDK
-v1.1 2019-06-29
+# ZY_SDK API 说明，本SDK仅为海思SDK的补充，让开发海思应用功能更加简单，支持rtsp、rtmp、hsl，录像、回放、字幕、台标、抓拍、U盘和硬盘管理等功能。
+v1.1 2019-06-29 
 
 
 /************************************************/
@@ -60,9 +60,24 @@ rtsp服务端，支持多个通道，根据主控芯片的编码性能，可以�
 /************************************************/
 
 2、 RTMP push
-int ZY_MPI_RtmpPush_Init();
 
-int ZY_MPI_RtmpPush_CreateChn(unsigned int rtmpChn,const char * purl,RTMP_ATTR attr);
+rtmp推流，支持多个通道，根据主控芯片的编码性能，可以选择通道的数量。支持H.264，音频，视频等。
+
+2.1 int ZY_MPI_RtmpPush_Init();
+
+功能：初始化rtmp推流
+
+参数：无
+
+返回：0：成功，-1：失败；
+
+2.2 int ZY_MPI_RtmpPush_CreateChn(unsigned int rtmpChn,const char * purl,RTMP_ATTR attr);
+
+功能：创建一个rtmp推流通道，具体通道号发送音视频数据。
+
+参数：1：通道号；2：推流地址；3：rtmp推流的属性
+
+返回：0：成功，返回其他参数查看错误码；
 
 int ZY_MPI_RtmpPush_DestroyChn(unsigned int rtmpChn,RTMP_TYPE type);
 
