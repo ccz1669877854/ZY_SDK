@@ -228,7 +228,83 @@ hls推流使用rtmp转换，配置好相关的推流服务器即可，这里没�
 返回：0：成功，返回其他参数查看错误码；
 
 
+/************************************************/
 
+6、字幕、台标、OSD、时间显示等功能，支持文字输入，BMP图片输入，PNG透明度图片输入
+
+6.1 int ZY_MPI_OSD_CreateChn(int chn);
+
+功能：创建OSD通道
+
+参数：1：通道号；
+
+返回：0：成功，返回其他参数查看错误码；
+
+6.2 int ZY_MPI_OSD_DestroyChn(int chn);
+
+功能：销毁OSD通道
+
+参数：1：通道号；
+
+返回：0：成功，返回其他参数查看错误码；
+
+6.3 int ZY_MPI_OSD_SetChnAttr(int chn,ZY_OSD_ATTR_S attr);
+
+功能：设置OSD通道属性
+
+参数：1：通道号；2：OSD属性
+
+返回：0：成功，返回其他参数查看错误码；
+
+6.4 int ZY_MPI_OSD_GetChnAttr(int chn,ZY_OSD_ATTR_S * pattr);
+
+功能：获取OSD通道属性
+
+参数：1：通道号；2：OSD属性
+
+返回：0：成功，返回其他参数查看错误码；
+
+6.5 int ZY_MPI_OSD_BindDst(int OsdChn,ZY_OSD_DST_ATTR dstAttr,ZY_BOOL show,ZY_OSD_SHOW_ATTR_S showAttr);
+
+功能：绑定OSD到指定的VPSS显示，这是由于海思的框架决定
+
+参数：1：通道号；2：绑定属性；3：是否显示OSD；4：显示属性
+
+返回：0：成功，返回其他参数查看错误码；
+
+
+6.6 int ZY_MPI_OSD_UnBindDst(int OsdChn,ZY_OSD_DST_ATTR dstAttr);
+
+功能：解绑OSD到指定的VPSS显示
+
+参数：1：通道号；2：绑定属性
+
+返回：0：成功，返回其他参数查看错误码；
+
+6.7 int ZY_MPI_OSD_ShowEnable(int OsdChn,ZY_OSD_DST_ATTR dstAttr,ZY_BOOL show,unsigned int u32X,unsigned int u32Y);
+
+
+功能：使能显示，可以切换关闭或者显示
+
+参数：1：通道号；2：绑定属性；3：是否显示OSD；4：X位置；5：Y位置
+
+返回：0：成功，返回其他参数查看错误码；
+
+6.8 int ZY_MPI_OSD_SetShowPoint(int OsdChn,ZY_OSD_DST_ATTR dstAttr,unsigned int u32X,unsigned int u32Y);
+
+功能：设置显示位置
+
+参数：1：通道号；2：绑定属性；3：是否显示OSD；4：X位置；5：Y位置
+
+返回：0：成功，返回其他参数查看错误码；
+
+6.9 int ZY_MPI_OSD_SetShow(int OsdChn,const char* pName,ZY_OSD_SRC_TYPE srcType,unsigned int color,unsigned int fontSize,unsigned int * pWidth,unsigned int * pHeight,ZY_BOOL autoShow);
+
+功能：设置显示属性
+
+参数：1：通道号；2：需要显示的字符；3：显示类型，文字、图片等类型；4：文字颜色，仅对文字有效，图片无效；5:文字大小，字号，仅对文字有效；6：实际显示的占用的宽，比如创建OSD宽为1920，但是显示10个字符的长度仅为100像素。7：实际高度，比如字体为36，获取字体的实际高度。
+
+返回：0：成功，返回其他参数查看错误码；
 
 
 
