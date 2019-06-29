@@ -307,5 +307,35 @@ hls推流使用rtmp转换，配置好相关的推流服务器即可，这里没�
 
 返回：0：成功，返回其他参数查看错误码；
 
+/************************************************/
+
+7、抓拍JPEG图片，自动把抓拍到的图片保存到指定路径
+
+7.1 int ZY_MPI_Snap_StartJPEG(int VencChn,unsigned int u32Width,unsigned int u32Height);
+
+功能：启动抓拍，立刻生效
+
+参数：1：指令抓拍用哪个编码器编码；2：宽；3：高
+
+返回：0：成功，返回其他参数查看错误码；
+
+7.2 int ZY_MPI_Snap_StopJPEG(int VencChn);
+
+功能：停止抓拍，立刻生效
+
+参数：1：指令抓拍用哪个编码器编码；
+
+返回：0：成功，返回其他参数查看错误码；
+
+7.3 int ZY_MPI_Snap_SAVEJPEG(int vpssGroup,int vpssChn,int VencChn,const char * pFileName,unsigned int u32Width,unsigned int u32Height,int timeOut);
+
+功能：保存抓拍到的数据到指定的通道
+
+参数：1：VPSS组号，也即为数据来源；2：VPSS 通道号；3：编码器号；4：保存文件名和路径；5：长；6：宽；7：设置多长超时返回；
+
+返回：0：成功，返回其他参数查看错误码；
+
+
+
 
 
