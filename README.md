@@ -3,6 +3,7 @@ v1.1 2019-06-29
 
 
 /************************************************/
+
 1、RTSPServer
 
 int ZY_MPI_RtspServer_Init();
@@ -13,6 +14,7 @@ int ZY_MPI_RtspServer_SendVideoFrame(unsigned int rtspChn,unsigned char *pdata ,
 int ZY_MPI_RtspServer_SendAudioFrame(unsigned int rtspChn,unsigned char *pdata ,unsigned int length,unsigned long long int pts,ZY_CodecType  type);
 
 /************************************************/
+
 2、 RTMP push
 int ZY_MPI_RtmpPush_Init();
 
