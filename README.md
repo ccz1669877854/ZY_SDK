@@ -165,6 +165,68 @@ hls推流使用rtmp转换，配置好相关的推流服务器即可，这里没�
 
 返回：0：成功，返回其他参数查看错误码；
 
+/************************************************/
+
+5、回放模块，支持本地文件回放、rtsp IPC、rtmp 拉流等功能。
+
+5.1 int ZY_MPI_Demux_Init();
+
+功能：初始化Demux模块；
+
+参数：无；
+
+返回：0：成功，返回其他参数查看错误码；
+
+
+5.2 int ZY_MPI_Demux_CreateChn(unsigned int Chn,const char * pstring);
+
+功能：创建Demux通道，打开指定的URL文件或者地址
+
+参数：1：通道号；参数2：URL
+
+返回：0：成功，返回其他参数查看错误码；
+
+5.3 int ZY_MPI_Demux_DestroyChn(unsigned int Chn);
+
+功能：销毁Demux通道
+
+参数：1：通道号；
+
+返回：0：成功，返回其他参数查看错误码；
+
+5.4 int ZY_MPI_Demux_GetFrame(unsigned int Chn,unsigned char ** ppdata ,unsigned int * psize);
+
+功能：获取一帧数据，Get和Release配对使用
+
+参数：1：通道号；2：获取到的数据，需要双重指针；3：获取到的长度
+
+返回：0：成功，返回其他参数查看错误码；
+
+
+5.5 int ZY_MPI_Demux_ReleaseFrame(unsigned int Chn,unsigned char * pdata ,unsigned int size);
+
+
+功能：释放一帧数据，Get和Release配对使用
+
+参数：1：通道号；2：数据；3：数据长度
+
+返回：0：成功，返回其他参数查看错误码；
+
+5.6 int ZY_MPI_Demux_BindVdecAdec(unsigned int chn,ZY_DEMUXBIND_ATTR Attr);
+功能：绑定指定的Demux通道到海思解码器，绑定后会自动关联解码器并把解码后的数据传输给VPSS.
+
+参数：1：通道号；2：绑定属性
+
+返回：0：成功，返回其他参数查看错误码；
+
+5.7 int ZY_MPI_Demux_UnBindVdecAdec(unsigned int chn,ZY_DEMUXBIND_ATTR Attr);
+
+功能：解绑指定的Demux通道到海思解码器
+
+参数：1：通道号；2：绑定属性
+
+返回：0：成功，返回其他参数查看错误码；
+
 
 
 
