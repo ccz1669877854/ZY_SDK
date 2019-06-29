@@ -1,4 +1,4 @@
-# ZY_SDK API 说明，本SDK仅为海思SDK的补充，让开发海思应用功能更加简单，支持rtsp、rtmp、hsl，录像、回放、字幕、台标、抓拍、U盘和硬盘管理等功能。
+# ZY_SDK API 说明，本SDK仅为海思SDK的补充，让开发海思应用功能更加简单，支持rtsp、rtmp、hls，常见IPC摄像头,录像、回放、字幕、台标、抓拍、U盘和硬盘管理等功能。
 v1.1 2019-06-29 
 
 
@@ -81,9 +81,28 @@ rtmp推流，支持多个通道，根据主控芯片的编码性能，可以选�
 
 int ZY_MPI_RtmpPush_DestroyChn(unsigned int rtmpChn,RTMP_TYPE type);
 
+功能：销毁一个rtmp推流通道
+参数：1：通道号；2：rtmp类型
+
+返回：0：成功，返回其他参数查看错误码；
+
+
 int ZY_MPI_RtmpPush_SendVideoFrame(unsigned int rtmpChn,const char *pdata ,unsigned int length,unsigned long long int pts);
 
+功能：发送音频数据，海思编码后把数据之间填进来，支持按帧，按包格式发送。
+
+参数：1：通道号；2：数据；参数3：长度；参数4：时间戳，时间戳为-1为自动时间戳，API会自动处理，默认建议用户填写-1；
+
+返回：0：成功，返回其他参数查看错误码；
+
 int ZY_MPI_RtmpPush_SendAudioFrame(unsigned int rtmpChn,const char *pdata ,unsigned int length,unsigned long long int pts);
+
+功能：发送音频数据，海思编码后把数据之间填进来，支持按帧，按包格式发送。
+
+参数：1：通道号；2：数据；参数3：长度；参数4：时间戳，时间戳为-1为自动时间戳，API会自动处理，默认建议用户填写-1；
+
+返回：0：成功，返回其他参数查看错误码；
+
 
 
 
