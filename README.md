@@ -105,5 +105,68 @@ rtmp推流，支持多个通道，根据主控芯片的编码性能，可以选�
 返回：0：成功，返回其他参数查看错误码；
 
 
+/************************************************/
+
+3、 hls push
+
+hls推流使用rtmp转换，配置好相关的推流服务器即可，这里没有API说明。
+
+/************************************************/
+
+4、 录像，录像支持常见的格式录像，MP4、FLV、MKV、TS等。
+
+4.1 int ZY_MPI_Muxer_Init();
+
+功能：初始化录像；
+
+参数：无；
+
+返回：0：成功，返回其他参数查看错误码；
+
+4.2 int ZY_MPI_Muxer_CreateChn(unsigned int chn,ZY_MUXER_ATTR * pMuxerAttr);
+
+功能：创建录像，开始录像
+
+参数：1：通道号；参数2：录像的属性
+
+返回：0：成功，返回其他参数查看错误码；
+
+4.3 int ZY_MPI_Muxer_DetroyChn(unsigned int chn);
+
+功能：销毁录像，停止录像
+
+参数：1：通道号；
+
+返回：0：成功，返回其他参数查看错误码；
+
+
+4.4 int ZY_MPI_Muxer_PauseChn(unsigned int chn,ZY_MUXER_IS_PAUSE isPause);
+
+功能：暂停录像
+
+参数：1：通道号；2：暂停、恢复录像
+
+返回：0：成功，返回其他参数查看错误码；
+
+
+4.5 int ZY_MPI_Muxer_SendVideoFrame(unsigned int chn,unsigned char * pdata ,unsigned int size);
+
+功能：发送视频数据，海思编码后把数据之间填进来，支持按帧，按包格式发送。
+
+参数：1：通道号；2：数据；参数3：长度；
+
+返回：0：成功，返回其他参数查看错误码；
+
+4.6 int ZY_MPI_Muxer_SendAudioFrame(unsigned int chn,unsigned char * pdata ,unsigned int size);
+
+功能：发送音频数据，海思编码后把数据之间填进来，支持按帧，按包格式发送。
+
+参数：1：通道号；2：数据；参数3：长度；
+
+返回：0：成功，返回其他参数查看错误码；
+
+
+
+
 
 
