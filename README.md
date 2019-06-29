@@ -79,7 +79,7 @@ rtmp推流，支持多个通道，根据主控芯片的编码性能，可以选�
 
 返回：0：成功，返回其他参数查看错误码；
 
-int ZY_MPI_RtmpPush_DestroyChn(unsigned int rtmpChn,RTMP_TYPE type);
+2.3 int ZY_MPI_RtmpPush_DestroyChn(unsigned int rtmpChn,RTMP_TYPE type);
 
 功能：销毁一个rtmp推流通道
 参数：1：通道号；2：rtmp类型
@@ -87,7 +87,7 @@ int ZY_MPI_RtmpPush_DestroyChn(unsigned int rtmpChn,RTMP_TYPE type);
 返回：0：成功，返回其他参数查看错误码；
 
 
-int ZY_MPI_RtmpPush_SendVideoFrame(unsigned int rtmpChn,const char *pdata ,unsigned int length,unsigned long long int pts);
+2.4 int ZY_MPI_RtmpPush_SendVideoFrame(unsigned int rtmpChn,const char *pdata ,unsigned int length,unsigned long long int pts);
 
 功能：发送音频数据，海思编码后把数据之间填进来，支持按帧，按包格式发送。
 
@@ -95,7 +95,7 @@ int ZY_MPI_RtmpPush_SendVideoFrame(unsigned int rtmpChn,const char *pdata ,unsig
 
 返回：0：成功，返回其他参数查看错误码；
 
-int ZY_MPI_RtmpPush_SendAudioFrame(unsigned int rtmpChn,const char *pdata ,unsigned int length,unsigned long long int pts);
+2.5 int ZY_MPI_RtmpPush_SendAudioFrame(unsigned int rtmpChn,const char *pdata ,unsigned int length,unsigned long long int pts);
 
 功能：发送音频数据，海思编码后把数据之间填进来，支持按帧，按包格式发送。
 
