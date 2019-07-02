@@ -591,11 +591,11 @@ typedef struct _ZY_OSD_DST_ATTR
 
 {
 
-    	ZY_OSD_DST_TYPE dstType;  //目标类型
+    ZY_OSD_DST_TYPE dstType;  //目标类型
 	
-	unsigned int dstChn;     //目标的通道号
+    unsigned int dstChn;     //目标的通道号
 	
-	unsigned int Osdlayer;  //OSD的layer
+    unsigned int Osdlayer;  //OSD的layer
 	
 } ZY_OSD_DST_ATTR;
 
@@ -605,19 +605,19 @@ typedef struct _ZY_OSD_ATTR_S
 
 {
 
-    	/* bitmap pixel format*/
+    /* bitmap pixel format*/
 	
-   	 ZY_PIXEL_FORMAT_E enPixelFmt;   //yuv数据格式
+    ZY_PIXEL_FORMAT_E enPixelFmt;   //yuv数据格式
 
-    	/* background color, pixel format depends on "enPixelFmt" */
+    /* background color, pixel format depends on "enPixelFmt" */
 	
-   	 unsigned int  u32BgColor;  //OSD背景颜色
+    unsigned int  u32BgColor;  //OSD背景颜色
 
-    	/* region size */
+    /* region size */
 	
-    	ZY_SIZE_S stSize;	//区域大小
+    Y_SIZE_S stSize;	//区域大小
 	
-	unsigned int u32CanvasNum; //区域的内存数量
+    unsigned int u32CanvasNum; //区域的内存数量
 	
 
 }ZY_OSD_ATTR_S;
@@ -657,11 +657,11 @@ typedef struct _ZY_OSD_SHOW_QPINFO
 
 {
 
-	ZY_BOOL	 bQpDisable;
+    ZY_BOOL	 bQpDisable;
 	
-    	ZY_BOOL  bAbsQp;
+    ZY_BOOL  bAbsQp;
 	
-    	int   s32Qp;
+    int   s32Qp;
 	
 }ZY_OSD_SHOW_QPINFO;
 
@@ -671,25 +671,25 @@ typedef struct _ZY_OSD_SHOW_ATTR_S
 
 {
 
-   	 /* start point */
+    /* start point */
 	 
-    	ZY_POINT_S stPoint;
+    ZY_POINT_S stPoint;
     
-    	/* foreground transparence */
+    /* foreground transparence */
 
-    	unsigned int u32FgAlpha; //default 255
+    unsigned int u32FgAlpha; //default 255
 
-	/* background transparence */
+    /* background transparence */
 	
-   	 unsigned int u32BgAlpha; //default 255
+    unsigned int u32BgAlpha; //default 255
 
-	/* QP infomation when venc*/
+    /* QP infomation when venc*/
 	
-   	 ZY_OSD_SHOW_QPINFO stQpInfo;  
+    ZY_OSD_SHOW_QPINFO stQpInfo;  
 
-	/* invertColor infomation*/
+    /* invertColor infomation*/
 	
-    	ZY_OSD_INVERT_COLOR_S stInvertColor;
+    ZY_OSD_INVERT_COLOR_S stInvertColor;
 }ZY_OSD_SHOW_ATTR_S;
 
 6.10.7 定义显示位置
