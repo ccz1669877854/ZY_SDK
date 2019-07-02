@@ -381,6 +381,116 @@ typedef struct _ZY_MUXER_ATTR
 返回：0：成功，返回其他参数查看错误码；
 
 
+5.8 数据类型
+
+5.8.1 解码数据类型
+
+enum DEMUX_TYPE
+
+{
+
+DEMUX_AUDIO = 0,  //音频数据
+
+DEMUX_VIDEO = 1,  //视频数据
+
+
+};
+
+5.8.2 视频格式类型
+
+typedef enum _ZY_VIDEO_TYPE
+
+{
+
+VIDEO_TYPE_H264 = 0, //H.264
+
+VIDEO_TYPE_H265 = 1, //H.265
+
+VIDEO_TYPE_JPEG = 2, //JPEG
+
+
+}ZY_VIDEO_TYPE;
+
+5.8.3 解码播放状态
+
+typedef enum _ZY_DemuxCtrlSignal
+
+{
+
+	DEMUX_CTRL_STOP = 0,  //停止运行
+	
+	DEMUX_CTRL_SEEK,      //拖动或者快进
+	
+	DEMUX_CTRL_PAUSE,     //暂停
+    
+    	DEMUX_CTRL_START,     //开始或者恢复正常运行
+
+}ZY_DemuxCtrlSignal;
+
+5.8.4 运行模式选择
+
+typedef enum _ZY_TimeStampMode
+
+{
+
+	ZY_TIMESTAMP_MODE_FULL = 0, //no sleep，即全速运行，对IPC、流媒体适用
+	
+	ZY_TIMESTAMP_MODE_SYNC,    // sync with time stamp，同步运行，对本地文件适用
+    
+    	ZY_TIMESTAMP_MODE_BLOCK,  //block time，堵塞固定时间运行，可以根据播放状态调整
+
+}ZY_TimeStampMode;
+
+5.8.5 解码器和解码URL绑定属性
+
+typedef struct _ZY_DEMUXBIND_ATTR
+
+{
+
+	//video
+	
+	int VdecBlock; //视频堵塞解码
+
+
+	//audio
+	int AdecBlock; //音频堵塞解码
+
+
+	//chn
+	unsigned int chn;  //解码器通道，海思实际解码器
+
+	ZY_TimeStampMode timeMode;  //运行模式
+
+	unsigned int usBlock;  //ZY_TIMESTAMP_MODE_BLOCK  effective，运行模式为ZY_TIMESTAMP_MODE_BLOCK时，堵塞时间
+
+	ZY_DemuxCtrlSignal ctrl; //运行状态配置
+
+
+}ZY_DEMUXBIND_ATTR,* pZY_DEMUXBIND_ATTR;
+
+5.8.6 播放器状态
+
+typedef enum _ZY_DEMUXSTATE{
+
+    ZY_DEMUXSTATE_LOST = 1, //码率断开
+    
+    ZY_DEMUXSTATE_EOF = 2,  //结束
+    
+    ZY_DEMUXSTATE_TIMEOUT = 3,  //超时
+    
+    ZY_DEMUXSTATE_PAUSE = 4,    //暂停
+    
+    ZY_DEMUXSTATE_STOP = 5,    //停止 
+    
+    ZY_DEMUXSTATE_RUN = 6,     //正常运行
+    
+    ZY_DEMUXSTATE_SEEK = 7,    //拖动或快进快退
+    
+    ZY_DEMUXSTATE_ERROR = 8,   //错误
+
+	
+} ZY_DEMUXSTATE;
+
 /************************************************/
 
 6、字幕、台标、OSD、时间显示等功能，支持文字输入，BMP图片输入，PNG透明度图片输入
@@ -461,114 +571,154 @@ typedef struct _ZY_MUXER_ATTR
 
 6.10 数据类型
 
-6.10.1 解码数据类型
+6.10.1 OSD绑定目标
 
-enum DEMUX_TYPE
-
-{
-
-DEMUX_AUDIO = 0,  //音频数据
-
-DEMUX_VIDEO = 1,  //视频数据
-
-
-};
-
-6.10.2 视频格式类型
-
-typedef enum _ZY_VIDEO_TYPE
+typedef enum _ZY_OSD_DST_TYPE
 
 {
 
-VIDEO_TYPE_H264 = 0, //H.264
+    ZY_OSD_BINDVI, //绑定到VI显示
+    
+    ZY_OSD_BINDVENC, //绑定到VENC显示
+    
+    ZY_OSD_BINDVPSS, //绑定到VPSS显示
+    
+} ZY_OSD_DST_TYPE;
 
-VIDEO_TYPE_H265 = 1, //H.265
+6.10.2 OSD绑定目标熟悉
 
-VIDEO_TYPE_JPEG = 2, //JPEG
-
-
-}ZY_VIDEO_TYPE;
-
-6.10.3 解码播放状态
-
-typedef enum _ZY_DemuxCtrlSignal
+typedef struct _ZY_OSD_DST_ATTR
 
 {
 
-	DEMUX_CTRL_STOP = 0,  //停止运行
+    	ZY_OSD_DST_TYPE dstType;  //目标类型
 	
-	DEMUX_CTRL_SEEK,      //拖动或者快进
+	unsigned int dstChn;     //目标的通道号
 	
-	DEMUX_CTRL_PAUSE,     //暂停
-    
-    	DEMUX_CTRL_START,     //开始或者恢复正常运行
+	unsigned int Osdlayer;  //OSD的layer
+	
+} ZY_OSD_DST_ATTR;
 
-}ZY_DemuxCtrlSignal;
+6.10.3 OSD属性
 
-6.10.3 运行模式选择
-
-typedef enum _ZY_TimeStampMode
+typedef struct _ZY_OSD_ATTR_S
 
 {
 
-	ZY_TIMESTAMP_MODE_FULL = 0, //no sleep，即全速运行，对IPC、流媒体适用
+    	/* bitmap pixel format*/
 	
-	ZY_TIMESTAMP_MODE_SYNC,    // sync with time stamp，同步运行，对本地文件适用
-    
-    	ZY_TIMESTAMP_MODE_BLOCK,  //block time，堵塞固定时间运行，可以根据播放状态调整
+   	 ZY_PIXEL_FORMAT_E enPixelFmt;   //yuv数据格式
 
-}ZY_TimeStampMode;
+    	/* background color, pixel format depends on "enPixelFmt" */
+	
+   	 unsigned int  u32BgColor;  //OSD背景颜色
 
-6.10.4 解码器和解码URL绑定属性
+    	/* region size */
+	
+    	ZY_SIZE_S stSize;	//区域大小
+	
+	unsigned int u32CanvasNum; //区域的内存数量
+	
 
-typedef struct _ZY_DEMUXBIND_ATTR
+}ZY_OSD_ATTR_S;
+
+6.10.4 定义OSD 反色触发模式
+
+typedef enum _ZY_INVERT_COLOR_MODE_E
 
 {
 
-	//video
+    ZY_LESSTHAN_LUM_THRESH = 0,   /* the lum of the video is less than the lum threshold which is set by u32LumThresh  */ 
+    
+    ZY_MORETHAN_LUM_THRESH,       /* the lum of the video is more than the lum threshold which is set by u32LumThresh  */
+    
+    ZY_INVERT_COLOR_BUTT
+    
+}ZY_INVERT_COLOR_MODE_E;
+
+6.10.5 定义OSD 反色相关属性
+
+typedef struct _ZY_OSD_INVERT_COLOR_S
+
+{
+
+    ZY_SIZE_S              stInvColArea;                //it must be multipe of 16 but not more than 64.
+    
+    unsigned int              u32LumThresh;                //the threshold to decide whether invert the OSD's color or not.
+    
+    ZY_INVERT_COLOR_MODE_E enChgMod;      
+    
+    ZY_BOOL             bInvColEn;                   //the switch of inverting color.
+    
+}ZY_OSD_INVERT_COLOR_S;
+
+6.10.6 定义OSD编码QP值
+typedef struct _ZY_OSD_SHOW_QPINFO
+
+{
+
+	ZY_BOOL	 bQpDisable;
 	
-	int VdecBlock; //视频堵塞解码
-
-
-	//audio
-	int AdecBlock; //音频堵塞解码
-
-
-	//chn
-	unsigned int chn;  //解码器通道，海思实际解码器
-
-	ZY_TimeStampMode timeMode;  //运行模式
-
-	unsigned int usBlock;  //ZY_TIMESTAMP_MODE_BLOCK  effective，运行模式为ZY_TIMESTAMP_MODE_BLOCK时，堵塞时间
-
-	ZY_DemuxCtrlSignal ctrl; //运行状态配置
-
-
-}ZY_DEMUXBIND_ATTR,* pZY_DEMUXBIND_ATTR;
-
-6.10.4 播放器状态
-
-typedef enum _ZY_DEMUXSTATE{
-
-    ZY_DEMUXSTATE_LOST = 1, //码率断开
-    
-    ZY_DEMUXSTATE_EOF = 2,  //结束
-    
-    ZY_DEMUXSTATE_TIMEOUT = 3,  //超时
-    
-    ZY_DEMUXSTATE_PAUSE = 4,    //暂停
-    
-    ZY_DEMUXSTATE_STOP = 5,    //停止 
-    
-    ZY_DEMUXSTATE_RUN = 6,     //正常运行
-    
-    ZY_DEMUXSTATE_SEEK = 7,    //拖动或快进快退
-    
-    ZY_DEMUXSTATE_ERROR = 8,   //错误
-
+    	ZY_BOOL  bAbsQp;
 	
-} ZY_DEMUXSTATE;
+    	int   s32Qp;
+	
+}ZY_OSD_SHOW_QPINFO;
 
+
+6.10.6 定义显示属性
+typedef struct _ZY_OSD_SHOW_ATTR_S
+
+{
+
+   	 /* start point */
+	 
+    	ZY_POINT_S stPoint;
+    
+    	/* foreground transparence */
+
+    	unsigned int u32FgAlpha; //default 255
+
+	/* background transparence */
+	
+   	 unsigned int u32BgAlpha; //default 255
+
+	/* QP infomation when venc*/
+	
+   	 ZY_OSD_SHOW_QPINFO stQpInfo;  
+
+	/* invertColor infomation*/
+	
+    	ZY_OSD_INVERT_COLOR_S stInvertColor;
+}ZY_OSD_SHOW_ATTR_S;
+
+6.10.7 定义显示位置
+
+typedef enum _ZY_OSD_AUTO_POSITION
+
+{
+
+    AUTO_NULL = -1,
+    
+    AUTO_LEFT_TOP = 0,   
+    
+    AUTO_LEFT_BOTTOM,     
+    
+    AUTO_RIGHT_TOP,
+    
+    AUTO_RIGHT_BOTTOM,   
+    
+    AUTO_LEFT_MIDDLE,
+    
+    AUTO_RIGHT_MIDDLE,
+    
+    AUTO_CENTRE_TOP,   
+    
+    AUTO_CENTRE_MIDDLE, 
+    
+    AUTO_CENTRE_BOTTOM, 
+    
+}ZY_OSD_AUTO_POSITION;
 
 
 /************************************************/
