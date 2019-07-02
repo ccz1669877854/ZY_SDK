@@ -417,13 +417,13 @@ typedef enum _ZY_DemuxCtrlSignal
 
 {
 
-	DEMUX_CTRL_STOP = 0,  //停止运行
+    DEMUX_CTRL_STOP = 0,  //停止运行
 	
-	DEMUX_CTRL_SEEK,      //拖动或者快进
+    DEMUX_CTRL_SEEK,      //拖动或者快进
 	
-	DEMUX_CTRL_PAUSE,     //暂停
+    DEMUX_CTRL_PAUSE,     //暂停
     
-    	DEMUX_CTRL_START,     //开始或者恢复正常运行
+    DEMUX_CTRL_START,     //开始或者恢复正常运行
 
 }ZY_DemuxCtrlSignal;
 
@@ -433,11 +433,11 @@ typedef enum _ZY_TimeStampMode
 
 {
 
-	ZY_TIMESTAMP_MODE_FULL = 0, //no sleep，即全速运行，对IPC、流媒体适用
+    ZY_TIMESTAMP_MODE_FULL = 0, //no sleep，即全速运行，对IPC、流媒体适用
 	
-	ZY_TIMESTAMP_MODE_SYNC,    // sync with time stamp，同步运行，对本地文件适用
+    ZY_TIMESTAMP_MODE_SYNC,    // sync with time stamp，同步运行，对本地文件适用
     
-    	ZY_TIMESTAMP_MODE_BLOCK,  //block time，堵塞固定时间运行，可以根据播放状态调整
+    ZY_TIMESTAMP_MODE_BLOCK,  //block time，堵塞固定时间运行，可以根据播放状态调整
 
 }ZY_TimeStampMode;
 
