@@ -146,7 +146,7 @@ rtmp推流，支持多个通道，根据主控芯片的编码性能，可以选�
 
 返回：0：成功，返回其他参数查看错误码；
 
-2.6 结构体
+2.6 数据类型
 
 2.6.1 RTMP类型
 
@@ -243,6 +243,80 @@ hls推流使用rtmp转换，配置好相关的推流服务器即可，这里没�
 参数：1：通道号；2：数据；参数3：长度；
 
 返回：0：成功，返回其他参数查看错误码；
+
+4.7 数据类型
+
+4.7.1 编码类型
+
+typedef enum {
+
+	ZY_H264   =0,
+	
+	ZY_H265   =1,
+	
+}ZY_VECN_TYPE;
+
+
+4.7.2 录像文件类型
+
+typedef enum {
+
+	ZY_ONLYVIDEO   =0, //只有视频
+	
+	ZY_ONLYAUDIO   =1, //只有音频
+	
+	ZY_VIDEOAUDIO  =2, //具有音视频
+
+
+}ZY_MUXER_TYPE;
+
+
+4.7.3 暂停和正常运行枚举
+
+typedef enum {
+
+	ZY_MUXER_RUN  =0, //运行
+	
+	ZY_MUXER_PAUSE   =1, //暂停
+	
+
+}ZY_MUXER_IS_PAUSE;
+
+4.7.4 录像属性结构体
+
+typedef struct _ZY_MUXER_ATTR
+
+{
+
+	//video
+	
+	char fileName[512]; //录像文件名
+	
+	unsigned int width; //视频宽
+	
+	unsigned int height; //视频高
+	
+	ZY_PIC_FPS fps; //帧率
+	
+	ZY_VECN_TYPE vencType; //编码类型
+
+	//audio
+	
+	ZY_AUDIO_BIT_WIDTH_E bitWidth; //音频数据宽度
+	
+	ZY_AUDIO_SOUND_MODE_E chnMode; //声道模式
+	
+	ZY_AUDIO_SAMPLERATE sample_rate; //采样率
+	
+	ZY_AUDIO_BIT_RATE_E bitRate;   //比特率
+	
+
+	ZY_MUXER_TYPE type;
+	
+
+
+}ZY_MUXER_ATTR,* pZY_MUXER_ATTR;
+
 
 /************************************************/
 
