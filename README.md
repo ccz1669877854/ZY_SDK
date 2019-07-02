@@ -151,22 +151,36 @@ rtmp推流，支持多个通道，根据主控芯片的编码性能，可以选�
 2.6.1 RTMP类型
 
 typedef enum _RTMP_TYPE
+
 {
+
 	RTMP_H264, //只有H.264视频
+	
 	RTMP_H265, //只有H.265视频
+	
 	RTMP_H264_AAC,  //AAC+H.264
+	
 	RTMP_H265_AAC,  //AAC+H.265
-	RTMP_IGNORE
+	
+	RTMP_IGNORE //自动类型
+	
 } RTMP_TYPE;
+
 
 2.6.2 RTMP属性
 
 typedef struct _RTMP_ATTR
+
 {
+
 	RTMP_TYPE  type;
+	
 	int ChunkSize; //-1 defaut ，ChunkSize;
+	
 	int MessageBiggestSize;//-1 defaut ，MessageBiggestSize
+	
 } RTMP_ATTR;
+
 
 2.7 错误码
 
