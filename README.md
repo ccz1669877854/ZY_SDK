@@ -436,10 +436,52 @@ typedef struct _ZY_MUXER_ATTR
 
 返回：0：成功，返回其他参数查看错误码；
 
+5.8 int ZY_MPI_Demux_GetCtrlAttr(unsigned int chn,ZY_DEMUXBIND_ATTR * pCtrl);
 
-5.8 数据类型
+功能：获取绑定熟悉
 
-5.8.1 解码数据类型
+参数：1：通道号；2：绑定属性
+
+返回：0：成功，返回其他参数查看错误码；
+
+5.9 int ZY_MPI_Demux_SetCtrlAttr(unsigned int chn,ZY_DEMUXBIND_ATTR ctrl);
+
+功能：设置绑定熟悉
+
+参数：1：通道号；2：绑定属性
+
+返回：0：成功，返回其他参数查看错误码；
+
+
+5.10 int ZY_MPI_Demux_StartSeekStep(unsigned int chn,int seekStep,DEMUX_SEEK_DIRECTION SeekDirection);
+
+功能：seek API，单位为10S
+
+参数：1：通道号；2：seekStep为X1，X2，X4，X8等参数，单位为10S，即seekStep等于2时，seek为20S；通道3：Seek方向，快进或快退
+
+返回：0：成功，返回其他参数查看错误码；
+
+
+5.11 int ZY_MPI_Demux_StartSeekLength(unsigned int chn,long long int seekLength);
+
+功能：seek API，单位为us
+
+参数：1：通道号；2：Seek到指定位置，单位us
+
+返回：0：成功，返回其他参数查看错误码；
+
+
+5.12 int ZY_MPI_Demux_StopSeek(unsigned int chn);
+
+功能：停止seek，恢复正常播放
+
+参数：1：通道号；
+
+返回：0：成功，返回其他参数查看错误码；
+
+5.13 数据类型
+
+5.13.1 解码数据类型
 
 enum DEMUX_TYPE
 
@@ -452,7 +494,7 @@ DEMUX_VIDEO = 1,  //视频数据
 
 };
 
-5.8.2 视频格式类型
+5.13.2 视频格式类型
 
 typedef enum _ZY_VIDEO_TYPE
 
@@ -467,7 +509,7 @@ VIDEO_TYPE_JPEG = 2, //JPEG
 
 }ZY_VIDEO_TYPE;
 
-5.8.3 解码播放状态
+5.13.3 解码播放状态
 
 typedef enum _ZY_DemuxCtrlSignal
 
@@ -483,7 +525,7 @@ typedef enum _ZY_DemuxCtrlSignal
 
 }ZY_DemuxCtrlSignal;
 
-5.8.4 运行模式选择
+5.13.4 运行模式选择
 
 typedef enum _ZY_TimeStampMode
 
@@ -497,7 +539,7 @@ typedef enum _ZY_TimeStampMode
 
 }ZY_TimeStampMode;
 
-5.8.5 解码器和解码URL绑定属性
+5.13.5 解码器和解码URL绑定属性
 
 typedef struct _ZY_DEMUXBIND_ATTR
 
@@ -524,7 +566,7 @@ typedef struct _ZY_DEMUXBIND_ATTR
 
 }ZY_DEMUXBIND_ATTR,* pZY_DEMUXBIND_ATTR;
 
-5.8.6 播放器状态
+5.13.6 播放器状态
 
 typedef enum _ZY_DEMUXSTATE{
 
@@ -547,7 +589,7 @@ typedef enum _ZY_DEMUXSTATE{
 	
 } ZY_DEMUXSTATE;
 
-5.9 错误码
+5.14 错误码
 
 #define ZY_ERR_DEMUX_INVALID_CHNID  	0xA0B0B000
 
