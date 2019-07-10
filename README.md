@@ -122,6 +122,7 @@ typedef struct _ZY_RTSP_ATTR
 2、 RTMP push
 
 rtmp推流，支持多个通道，根据主控芯片的编码性能，可以选择通道的数量。支持H.264，H.265，音频，视频等。
+
 注:RTMP H.265为非标准协议，RTMP推流只是把H.265帧发送而已，用户解析对应的Nalu帧即可，兼容性强。
 
 2.1 int ZY_MPI_RtmpPush_Init();
