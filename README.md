@@ -123,7 +123,7 @@ typedef struct _ZY_RTSP_ATTR
 
 rtmp推流，支持多个通道，根据主控芯片的编码性能，可以选择通道的数量。支持H.264，H.265，音频，视频等。
 
-注:RTMP H.265为非标准协议，RTMP推流只是把H.265帧发送而已，用户解析对应的Nalu帧即可，兼容性强。
+注:RTMP H.265为非标准协议兼容性差，用户只能自编自解。H.265 使用开源库librtmp的RTMP_ReadPacket API读取，RTMPPacket结构体的第7和第8个原始为后面nalu的长度，第9个原始开始就为实际数据，nalu长度这里包括起始码。
 
 2.1 int ZY_MPI_RtmpPush_Init();
 
