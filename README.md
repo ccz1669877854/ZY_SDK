@@ -121,7 +121,8 @@ typedef struct _ZY_RTSP_ATTR
 
 2、 RTMP push
 
-rtmp推流，支持多个通道，根据主控芯片的编码性能，可以选择通道的数量。支持H.264，音频，视频等。
+rtmp推流，支持多个通道，根据主控芯片的编码性能，可以选择通道的数量。支持H.264，H.265，音频，视频等。
+注:RTMP H.265为非标准协议，RTMP推流只是把H.265帧发送而已，用户解析对应的Nalu帧即可，兼容性强。
 
 2.1 int ZY_MPI_RtmpPush_Init();
 
@@ -147,19 +148,19 @@ rtmp推流，支持多个通道，根据主控芯片的编码性能，可以选�
 返回：0：成功，返回其他参数查看错误码；
 
 
-2.4 int ZY_MPI_RtmpPush_SendVideoFrame(unsigned int rtmpChn,const char *pdata ,unsigned int length,unsigned long long int pts);
+2.4 int ZY_MPI_RtmpPush_SendVideoFrame(unsigned int rtmpChn,const char *pdata ,unsigned int length,unsigned long long int pts,ZY_CodecType  type);
 
 功能：发送音频数据，海思编码后把数据之间填进来，支持按帧，按包格式发送。
 
-参数：1：通道号；2：数据；参数3：长度；参数4：时间戳，时间戳为-1为自动时间戳，API会自动处理，默认建议用户填写-1；
+参数：1：通道号；2：数据；参数3：长度；参数4：时间戳，时间戳为-1为自动时间戳，API会自动处理，默认建议用户填写-1；参数5：编码类型
 
 返回：0：成功，返回其他参数查看错误码；
 
-2.5 int ZY_MPI_RtmpPush_SendAudioFrame(unsigned int rtmpChn,const char *pdata ,unsigned int length,unsigned long long int pts);
+2.5 int ZY_MPI_RtmpPush_SendAudioFrame(unsigned int rtmpChn,const char *pdata ,unsigned int length,unsigned long long int pts,ZY_CodecType  type);
 
 功能：发送音频数据，海思编码后把数据之间填进来，支持按帧，按包格式发送。
 
-参数：1：通道号；2：数据；参数3：长度；参数4：时间戳，时间戳为-1为自动时间戳，API会自动处理，默认建议用户填写-1；
+参数：1：通道号；2：数据；参数3：长度；参数4：时间戳，时间戳为-1为自动时间戳，API会自动处理，默认建议用户填写-1；参数5：编码类型
 
 返回：0：成功，返回其他参数查看错误码；
 
