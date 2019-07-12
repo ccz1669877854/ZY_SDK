@@ -973,3 +973,83 @@ typedef enum _ZY_OSD_AUTO_POSITION
 
 返回：0：成功，返回其他参数查看错误码；
 
+/*************************************************************/
+
+10、 RTMP 拉流H.265
+此章节仅仅用于H.265拉流，配合本SDK的推流，一编一解。
+
+
+
+10.1 int ZY_MPI_RtmpH265Poll_Init();
+
+功能：RTMP拉流初始化
+
+参数：无
+
+返回：0：成功，返回其他参数查看错误码；
+
+10.2 int ZY_MPI_RtmpH265Poll_CreateChn(unsigned int rtmpPollChn,const char * purl,RTMPH265POLL_ATTR attr);
+
+功能：RTMP拉流通道创建，把采集到的音视频传送到指定的硬件编解码通道
+
+参数：1：通道号；2：RTMP 拉流的URL；参数3：拉流属性
+
+返回：0：成功，返回其他参数查看错误码；
+
+10.3 int ZY_MPI_RtmpH265Poll_DestroyChn(unsigned int rtmpPollChn);
+
+功能：销毁RTMP 拉流通道
+
+参数：1：通道号；
+
+返回：0：成功，返回其他参数查看错误码；
+
+10.4 数据类型
+
+typedef struct _RTMPH265POLL_ATTR
+
+{
+
+	int VdecBlock; //视频堵塞解码，单位10ms，0为不堵塞解码，填写指定的时间为堵塞时间
+
+
+	//audio
+	int AdecBlock; //音频堵塞解码，单位10ms，0为不堵塞解码，填写指定的时间为堵塞时间
+
+
+	//chn
+	int rtmpChn; //rtmp 通道号，即创建时候的通道号
+	
+	unsigned int VdecChn; //获取到的视频发送到指定的解码器
+	
+	unsigned int AdecChn; //获取到的音频发送到指定的解码器
+
+
+	unsigned int type; //此暂时不开放
+
+} RTMPH265POLL_ATTR;
+
+10.5 错误码
+
+#define ZY_ERR_RTMH265POLL_INVALID_CHNID 	 	0xA0F09000
+
+#define ZY_ERR_RTMH265POLL_INVALID_FILEPATH 		0xA0F09001
+
+#define ZY_ERR_RTMH265POLL_INVALID_OPENFILE 		0xA0F09002
+
+#define ZY_ERR_RTMH265POLL_INVALID_CODECID 		0xA0F09003
+
+#define ZY_ERR_RTMH265POLL_INVALID_NOSUPPORT		0xA0F09004
+
+#define ZY_ERR_RTMH265POLL_INVALID_CHNEXIST 		0xA0F09005
+
+#define ZY_ERR_RTMH265POLL_INVALID_PUSH			0xA0F09006
+
+#define ZY_ERR_RTMH265POLL_INVALID_PARAM		0xA0F09007
+
+#define ZY_ERR_RTMH265POLL_INVALID_CHNUNEXIST 		0xA0F09008
+
+#define ZY_ERR_RTMH265POLL_INVALID_THREAD 		0xA0F09009
+
+
+
